@@ -11,13 +11,24 @@ app.use(cors()); // Enable CORS for all routes
 app.use(express.json());
 
 // MongoDB Connection
-mongoose.connect('mongodb://localhost:27017/ecommerce', {
+const mongoURI = 'mongodb+srv://mohsinbhai894:mohsinisgood666@cluster0.fdiqf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+
+
+// Connect to MongoDB Atlas
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('Successfully connected to MongoDB Atlas!');
+  })
+  .catch(err => {
+    console.error('Error connecting to MongoDB Atlas:', err);
+  });
+/*mongoose.connect('mongodb://localhost:27017/ecommerce', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
   .then(() => console.log('Database connected'))
   .catch(err => console.error('Database connection error:', err));
-
+*/
 // Basic Route for Root Path
 app.get('/', (req, res) => {
   res.send('Welcome to the Ecommerce App!');
